@@ -1,4 +1,4 @@
-import javax.naming.directory.SearchControls;
+import java.util.*;;
 
 public class LinkedList {
     public static class  Node {
@@ -123,6 +123,46 @@ public class LinkedList {
         }
         prev.next = prev.next.next;
     }
+
+    public boolean isCycle(){
+        Node slow = head;
+        Node fast = head;
+
+        while(fast!= null && fast.next != null){
+            slow=slow.next;//+1
+            fast=fast.next.next;//+2 
+            if(fast == slow){
+                return true;
+            }
+
+        }return false;
+    }
+
+    public void rmvCycle(){
+        Node slow = head;
+        Node fast = head;
+        Node prev = null;//last node
+        boolean isCycle = false;
+        while(fast != null && fast.next != null){
+            slow=slow.next;//+1
+            fast=fast.next.next;//+2 
+            if(fast == slow){
+                isCycle= true;
+                break;
+            }
+
+        }
+        if(isCycle==false){
+            return;
+        }
+        slow = head;
+        while (fast!=slow) {
+            prev=fast;
+            fast=fast.next;
+            slow=slow.next;
+        }prev.next=null;//breaking the cycle
+
+    }
 public static void main(String args[]){
     LinkedList ll = new LinkedList();
     ll.addFirst(1);
@@ -131,9 +171,9 @@ public static void main(String args[]){
     ll.AddLast(4);
     ll.AddLast(5);
     ll.AddMiddle(3, 69);
-    System.out.println(Search(4));
-    ll.Reverse();
+    ll.tail.next = ll.head.next;
+    ll.rmvCycle();
     ll.printLinkedList();
-}
-}
+    
+}}
  
