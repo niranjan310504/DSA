@@ -1,3 +1,5 @@
+import javax.naming.directory.SearchControls;
+
 public class LinkedList {
     public static class  Node {
     int data;
@@ -61,23 +63,6 @@ public class LinkedList {
         temp.next=newNode;
         
     }
-    public int Search(int data){
-        if( head ==null){
-            System.out.println("list is empty");
-            return -1;
-        }
-        Node temp = head;
-        int i =0;
-        while (temp!=null) {
-            if(temp.data==data){
-                System.out.println("found key");
-                return i;
-            }
-            temp=temp.next;
-            i++;
-        }
-        return -1;
-    }
     public void printLinkedList(){
         if(head == null){
             System.out.println("LL is empty");
@@ -89,6 +74,55 @@ public class LinkedList {
             temp=temp.next;
         }System.out.println("null");
     }
+    public static int Search(int data){
+        if( head ==null){
+            System.out.println("list is empty");
+            return -1;
+        }
+        Node temp = head;
+        int i =0;
+        while (temp!=null) {
+            if(temp.data==data){
+                System.out.print("found key at index  ");
+                return i;
+            }
+            temp=temp.next;
+            i++;
+        }
+        return -1;
+    }
+    
+    public static void Reverse(){
+        Node prev = null;
+        Node curr =tail= head;
+        Node next ;
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr=next;
+        }
+        head = prev;
+    }
+    public static void RmvfromNth(int n){
+        int size =0;
+        Node temp = head;
+        while(temp!=null){
+            temp = temp.next;
+            size++;
+        }
+        Node prev=head;
+        if(n==size){
+            head=head.next;
+        }
+        int idx =1;
+        int itoFin= size-n;
+        while(idx<itoFin){
+            prev=prev.next;
+            idx++;
+        }
+        prev.next = prev.next.next;
+    }
 public static void main(String args[]){
     LinkedList ll = new LinkedList();
     ll.addFirst(1);
@@ -97,6 +131,8 @@ public static void main(String args[]){
     ll.AddLast(4);
     ll.AddLast(5);
     ll.AddMiddle(3, 69);
+    System.out.println(Search(4));
+    ll.Reverse();
     ll.printLinkedList();
 }
 }
