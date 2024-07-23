@@ -163,7 +163,58 @@ public class LinkedList {
         }prev.next=null;//breaking the cycle
 
     }
-public static void main(String args[]){
+    public Node merge(Node left, Node right){
+        Node mergeLL = new Node(-1);
+        Node temp = mergeLL;
+        while(right != null &&left != null){
+            if(left.data <=right.data){
+                temp.next= left;
+                left=left.next;
+                temp=temp.next;
+            }else{
+                temp.next= right;
+                right=right.next;
+                temp=temp.next;
+            }
+        }
+        while (left != null) {
+            temp.next= left;
+            left=left.next;
+            temp=temp.next;
+        }
+        while (right != null) {
+            temp.next=right;
+            right=right.next;
+            temp=temp.next;
+        }
+        return mergeLL.next;
+    }
+    public Node getmid(Node head){
+        Node fast = head.next;
+        Node slow = head;
+        
+        while(fast!=null && fast.next != null ){
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        return slow;
+    }
+    public Node mergeSort(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        //find mid
+        Node mid = getmid(head);
+        
+        //left and right merge sort
+        Node rightHead = mid.next;
+        mid.next=null;
+        Node newLef =mergeSort(head);
+        Node newRight=mergeSort(rightHead);
+        //merge
+        return merge(newLef,newRight);
+    }
+ public static void main(String args[]){
     LinkedList ll = new LinkedList();
     ll.addFirst(1);
     ll.addFirst(2);
@@ -171,9 +222,8 @@ public static void main(String args[]){
     ll.AddLast(4);
     ll.AddLast(5);
     ll.AddMiddle(3, 69);
-    ll.tail.next = ll.head.next;
-    ll.rmvCycle();
     ll.printLinkedList();
-    
+    ll.head=ll.mergeSort(head);
+    ll.printLinkedList();
 }}
  
