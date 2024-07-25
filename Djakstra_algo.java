@@ -1,6 +1,5 @@
 import java.util.*;
 
-import org.omg.CORBA.VM_NONE;
 public class Djakstra_algo {
     
     static class Edge {
