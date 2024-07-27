@@ -9,7 +9,6 @@ public class LinkedList {
         this.data = data;
         this.next = null;
     }
-         
     }
     public static Node head;
     public static Node tail;
@@ -214,7 +213,33 @@ public class LinkedList {
         //merge
         return merge(newLef,newRight);
     }
- public static void main(String args[]){
+    public void ZIg_zag(){
+        Node mid = getmid(head);
+        Node curr = mid.next;
+        mid.next=null;
+        Node prev=null;
+        Node next;
+        while(curr != null){
+            next=mid.next;
+            mid.next= prev;
+            prev=curr;
+            curr=next;
+        }
+        Node left = head;
+        Node right = prev;
+        Node nextL, nextR;
+        while(left != null && right != null){
+            nextL=left.next;
+            left.next=right;
+            nextR= right.next;
+            right.next=nextL;
+            left=nextL;
+            right=nextR;
+
+        }
+
+    }
+    public static void main(String args[]){
     LinkedList ll = new LinkedList();
     ll.addFirst(1);
     ll.addFirst(2);
@@ -223,7 +248,8 @@ public class LinkedList {
     ll.AddLast(5);
     ll.AddMiddle(3, 69);
     ll.printLinkedList();
-    ll.head=ll.mergeSort(head);
+    ll.mergeSort(head);
+    ll.printLinkedList();
+    ll.ZIg_zag();
     ll.printLinkedList();
 }}
- 
