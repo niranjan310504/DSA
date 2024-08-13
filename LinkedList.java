@@ -239,17 +239,39 @@ public class LinkedList {
         }
 
     }
+    /*Question 1 :
+Intersection of Two Linked Lists
+In a system there are two singly linked list. By some programming error, the end node of one
+of the linked lists got linked to the second list, forming an inverted Y-shaped list. Write a
+program to get the point where two linked lists merge.*/
+    public static Node FindIntersection(Node headA, Node headB){
+        Node ptrA = headA;
+        Node ptrB = headB;
+        while(ptrA != ptrB){
+        ptrA = (ptrA == null) ? headB : ptrA.next;
+        ptrB=(ptrB == null) ? headA : ptrB.next;
+    }
+    System.out.println("the linked lists intersect at "+ptrA.data);
+    return ptrA;
+}
     public static void main(String args[]){
     LinkedList ll = new LinkedList();
-    ll.addFirst(1);
-    ll.addFirst(2);
-    ll.addFirst(3);
-    ll.AddLast(4);
-    ll.AddLast(5);
-    ll.AddMiddle(3, 69);
-    ll.printLinkedList();
-    ll.mergeSort(head);
-    ll.printLinkedList();
-    ll.ZIg_zag();
-    ll.printLinkedList();
+     // Create two separate linked lists
+        Node headA = new Node(1);
+        headA.next = new Node(2);
+        headA.next.next = new Node(3);
+
+        Node headB = new Node(4);
+        headB.next = new Node(5);
+
+        // Create the common part
+        Node common = new Node(6);
+        common.next = new Node(7);
+        common.next.next = new Node(8);
+
+        // Attach the common part to both lists
+        headA.next.next.next = common; // List A: 1 -> 2 -> 3 -> 6 -> 7 -> 8
+        headB.next.next = common;      // List B: 4 -> 5 -> 6 -> 7 -> 8
+        FindIntersection(headA, headB);
+
 }}
