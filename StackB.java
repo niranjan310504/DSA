@@ -109,9 +109,27 @@ public class StackB  {
             return false;
         }
     }
+    public static boolean duplicateParenthesis(String str){
+        Stack<Character> s= new Stack<>();
+        for(int i =0; i<str.length(); i++){
+            char ch = str.charAt(i);
+            if(ch==')'){
+                int count =0;
+                while (!s.isEmpty()&& s.peek()!='('){
+                    count++;
+                    s.pop();
+                }if(count <1){
+                    return true;
+                }
+            }else{
+                s.push(ch);
+            }
+                }return false;
+        }
+    
     public static void main(String[] args) {
-    String s = "(]";
-    System.out.println(validParentheses(s));
+    String s = "(a)";
+    System.out.println(duplicateParenthesis(s));
 
 }
 }
