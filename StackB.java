@@ -86,15 +86,32 @@ public class StackB  {
         }
     }
 }
-    public static void main(String[] args) {
-        //Stack s =new Stack();
-    int stock[] = {100,80,70,60,85,100};
-    int ng[] = new int[stock.length];
-    nextGreater(stock,ng);
-
-    for (int i=0; i<ng.length; i++){
-        System.out.println(ng[i]+" ");
+    public static boolean validParentheses(String str){
+        Stack<Character> s = new Stack<>();
+        for(int i =0; i<str.length(); i++){
+            char ch = str.charAt(i);
+            if(ch=='(' || ch=='{'||ch=='['){
+                s.push(ch);
+            }else{
+                if(s.isEmpty()){
+                    return false;
+                }else{
+                    if((s.peek()=='(' && ch==')')||(s.peek()=='{' && ch=='}')||(s.peek()=='[' && ch==']')){
+                        s.pop();
+                    }else{
+                        return false;
+                    }
+                }
+            }
+        }if(s.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
+    public static void main(String[] args) {
+    String s = "(]";
+    System.out.println(validParentheses(s));
 
 }
 }
