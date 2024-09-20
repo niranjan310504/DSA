@@ -126,10 +126,32 @@ public class StackB  {
             }
                 }return false;
         }
+    public static String simplifyPath( String path){
+        Stack<String> s = new  Stack<>();
+        for(String components :path.split("/")){
+            if(components.isEmpty()||components.equals(".")){
+                continue;
+            }else if(components.equals("..")){
+                if(!s.isEmpty()){
+                s.pop();
+                }
+            }else{
+                s.push(components);
+            }
+        }if(s.isEmpty()){
+            return "/";
+        }
+        StringBuilder result =new StringBuilder();
+        for(String dir : s){
+            result.append("/").append(dir);
+        }
+        return result.toString();
+
+    }
     
     public static void main(String[] args) {
-    String s = "(a)";
+    String s = "/.../a/../b/c/../d/./";
     System.out.println(duplicateParenthesis(s));
-
+        int x = Integer.MAX_VALUE;
 }
 }
