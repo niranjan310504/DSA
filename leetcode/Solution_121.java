@@ -1,7 +1,6 @@
 /**
  * Solution_121
  */
-import java.util.*;
 public class Solution_121 {
 
     public static int maxProfit(int[] prices) {
