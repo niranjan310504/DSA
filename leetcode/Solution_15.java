@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Solution_15 {
     public static List<List<Integer>> threeSum(int[] nums) {
-        HashMap<Integer, INte
+    
         twoSum(nums, 0);
     }
     public static int[]  twoSum(int[] numbers, int target) {
